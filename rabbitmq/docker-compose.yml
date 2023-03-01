@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    image: rabbitmq
+    volumes:
+      - /var/lib/rabbitmqvolume/:/app
+    restart: always
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123
+    networks:
+        docker_my_networks:
+                ipv4_address: 172.28.1.4
+
+
+networks:
+        docker_my_networks:
+                external: true
+
