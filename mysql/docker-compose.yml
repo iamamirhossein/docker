@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:5.7
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=my_db
+      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+    ports:
+      - '3306:3306'
+    volumes:
+      - /var/lib/mysqlvolume/mysql:/var/lib/mysql
+      - /var/lib/mysqlvolume/db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+        docker_my_networks:
+                ipv4_address: 172.28.1.7
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  docker_my_networks: 
+                external: true
