@@ -1,0 +1,18 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./redis_data:/data                             # Mounts the ./redis_data directory to /data in the container
+    command: redis-server --requirepass yourpassword    # Sets a password for Redis
+    environment:
+      - REDIS_PASSWORD=yourpassword                    # Passes the password to Redis as an environment variable
+    networks:
+        docker_my_networks:
+                ipv4_address: 172.28.1.2
+
+
+networks:
+  docker_my_networks: 
+                external: true
